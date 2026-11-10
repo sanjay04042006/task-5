@@ -1,0 +1,24 @@
+{
+  "name": "defensive-security-capstone",
+  "version": "1.0.0",
+  "description": "Secure task management application and security assessment demo",
+  "main": "app.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "audit": "npm audit"
+  },
+  "keywords": [
+    "security",
+    "capstone",
+    "vulnerability-assessment",
+    "remediation"
+  ],
+  "author": "Student Security Practitioner",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Task Manager - Capstone Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen p-6">
+    <div class="max-w-xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">Secure Task Manager</h1>
+        <p class="text-sm text-gray-500 mb-6">Defensive Security Assessment Capstone Demo App</p>
+
+        <!-- Task Input Form -->
+        <div class="mb-4">
+            <label for="taskInput" class="block text-sm font-medium text-gray-700 mb-1">New Task (Sanitized Input)</label>
+            <div class="flex gap-2">
+                <input type="text" id="taskInput" placeholder="Enter task description..." 
+                    class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button onclick="addTask()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Add Task</button>
+            </div>
+        </div>
+
+        <!-- Task List -->
+        <div class="mt-6">
+            <h2 class="text-lg font-semibold text-gray-700 mb-3">Task List</h2>
+            <ul id="taskList" class="divide-y divide-gray-200 border border-gray-200 rounded-lg p-2">
+                <li class="py-2 px-3 text-gray-600 text-sm">Sample secured task item (XSS prevented)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Secure implementation using textContent to prevent Reflected XSS
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            const taskText = input.value.trim();
+            if (!taskText) return;
+
+            const list = document.getElementById('taskList');
+            const li = document.createElement('li');
+            li.className = 'py-2 px-3 text-gray-800 text-sm flex justify-between items-center';
+
+            const span = document.createElement('span');
+            // Using textContent instead of innerHTML prevents script injection
+            span.textContent = taskText; 
+            li.appendChild(span);
+
+            list.appendChild(li);
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
